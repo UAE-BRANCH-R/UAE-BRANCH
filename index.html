@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE BRANCH | Premium Crypto Exchange</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .glass-card, .history-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            flex: 1;
+            min-width: 320px;
+            max-width: 500px;
+        }
+
+        .glass-card { text-align: center; }
+
+        .brand-logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #81ecec;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: #a29bfe;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .label-text {
+            display: block;
+            text-align: left;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            color: #dfe6e9;
+            font-weight: 600;
+        }
+
+        .input-style {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
+            border-radius: 10px !important;
+            padding: 10px !important;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        /* লাল বর্ডার যখন ১৮ এর নিচে হবে */
+        .input-error {
+            border: 2px solid #ff7675 !important;
+            background: rgba(255, 118, 117, 0.15) !important;
+        }
+
+        .error-text {
+            color: #ff7675;
+            font-size: 0.75rem;
+            text-align: left;
+            margin-top: -12px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .input-style option { background: #1e272e; color: #fff; }
+
+        .binance-section {
+            background: rgba(129, 236, 236, 0.05);
+            border: 1px solid rgba(129, 236, 236, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .binance-id {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fab1a0;
+            cursor: pointer;
+        }
+
+        .upload-box {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-buy:active { transform: scale(0.98); }
+
+        #history-table {
+            width: 100%;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        #history-table th { color: #81ecec; text-align: left; padding-bottom: 8px; }
+
+        @media (max-width: 480px) {
+            .brand-name { font-size: 1.5rem; }
+            .glass-card, .history-card { padding: 20px; min-width: 100%; }
+            .binance-id { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="glass-card">
+            <img src="photo_2026-04-10_10-03-31.jpg" alt="Logo" class="brand-logo">
+            <h1 class="brand-name">UAE BRANCH</h1>
+            <p class="tagline">Secure Exchange Solution</p>
+
+            <label class="label-text">1. Payment Method</label>
+            <select class="form-select input-style" id="paymentMethod">
+                <option value="Binance Pay">Binance Pay</option>
+                <option value="USDT TRC20">USDT (TRC20)</option>
+                <option value="BTC">Bitcoin</option>
+            </select>
+
+            <label class="label-text">2. Your Email Address</label>
+            <input type="email" class="form-control input-style" id="userEmail" placeholder="example@mail.com">
+
+            <label class="label-text">3. Select Crypto to Buy</label>
+            <select class="form-select input-style" id="cryptoToBuy">
+                <optgroup label="New & Trending">
+                    <option value="ASTER">ASTER</option>
+                    <option value="MOON">MOON</option>
+                    <option value="FET">FET</option>
+                    <option value="RNDR">RNDR</option>
+                    <option value="NEON">NEON</option>
+                    <option value="TAO">TAO</option>
+                    <option value="OCEAN">OCEAN</option>
+                    <option value="NEAR">NEAR</option>
+                    <option value="ONDO">ONDO</option>
+                    <option value="PENDLE">PENDLE</option>
+                </optgroup> 
+                <optgroup label="Top Potential">
+                    <option value="LINK">LINK</option>
+                    <option value="IMX">IMX</option>
+                    <option value="TIA">TIA</option>
+                    <option value="PYTH">PYTH</option>
+                    <option value="NOT">NOT</option>
+                </optgroup>
+            </select>
+
+            <label class="label-text">4. Amount (USD)</label>
+            <input type="number" class="form-control input-style" id="amount" placeholder="Minimum $18" oninput="validateAmount()">
+            <div id="amountError" class="error-text">Min order is $18!</div>
+
+            <div class="binance-section">
+                <p style="font-size: 0.7rem; color: #81ecec; margin-bottom: 2px;">SEND PAYMENT TO</p>
+                <div class="binance-id" onclick="copyID()">1130983375</div>
+                <p style="font-size: 0.65rem; color: #ccc;">(Click ID to copy)</p>
+            </div>
+
+            <label class="label-text">5. Upload Screenshot</label>
+            <div class="upload-box">
+                <input type="file" id="screenshot" class="form-control bg-transparent border-0 text-white shadow-none" accept="image/*">
+            </div>
+
+            <button class="btn-buy" onclick="handlePurchase()">Verify & Submit Order</button>
+
+            <div id="successMessage" class="mt-3 p-2 d-none" style="background: rgba(85, 239, 196, 0.2); border: 1px solid #55efc4; border-radius: 10px; color: #55efc4;">
+                ✅ Order Submitted! Waiting for verification.
+            </div>
+        </div>
+
+        <div class="history-card">
+            <h3 style="font-size: 1.1rem; color: #81ecec; text-align: center;">MY ORDERS</h3>
+            <div id="empty-text" class="text-center text-secondary mt-3">No history found.</div>
+            <table id="history-table" class="d-none">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Crypto</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'uae_branch_orders_v4';
+        let orders = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+        function copyID() {
+            navigator.clipboard.writeText("1130983375");
+            alert("Binance ID Copied!");
+        }
+
+        // রিয়েল-টাইম ভ্যালিডেশন
+        function validateAmount() {
+            const amountInput = document.getElementById('amount');
+            const errorText = document.getElementById('amountError');
+            const val = parseFloat(amountInput.value);
+
+            if (val < 18) {
+                amountInput.classList.add('input-error');
+                errorText.style.display = 'block';
+            } else {
+                amountInput.classList.remove('input-error');
+                errorText.style.display = 'none';
+            }
+        }
+
+        function handlePurchase() {
+            const email = document.getElementById('userEmail').value;
+            const crypto = document.getElementById('cryptoToBuy').value;
+            const amountInput = document.getElementById('amount');
+            const amount = parseFloat(amountInput.value);
+            const file = document.getElementById('screenshot').files.length;
+
+            if (!email || isNaN(amount) || file === 0) {
+                alert("Please fill all fields and upload proof!");
+                return;
+            }
+
+            if (amount < 18) {
+                alert("Minimum order amount is $18!");
+                return;
+            }
+
+            const btn = document.querySelector('.btn-buy');
+            btn.innerText = "Verifying...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const now = Date.now();
+                const newOrder = {
+                    id: now, // Unique ID
+                    timestamp: now,
+                    date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " " + new Date().toLocaleDateString(),
+                    crypto: crypto,
+                    amount: "$" + amount,
+                    status: "Pending"
+                };
+
+                orders.unshift(newOrder);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(orders.slice(0, 10)));
+                renderHistory();
+
+                document.getElementById('successMessage').classList.remove('d-none');
+                btn.innerText = "Verify & Submit Order";
+                btn.disabled = false;
+
+                // Reset inputs
+                amountInput.value = "";
+                document.getElementById('screenshot').value = "";
+                document.getElementById('userEmail').value = "";
+            }, 2000);
+        }
+
+        function renderHistory() {
+            const body = document.getElementById('history-body');
+            const table = document.getElementById('history-table');
+            const empty = document.getElementById('empty-text');
+
+            if (orders.length > 0) {
+                empty.classList.add('d-none');
+                table.classList.remove('d-none');
+                
+                const now = Date.now();
+                const twelveMinutesInMs = 12 * 60 * 1000;
+
+                body.innerHTML = orders.map(o => {
+                    // যদি ১২ মিনিট পার হয়ে যায়, তবে স্ট্যাটাস Successful দেখাবে
+                    let currentStatus = o.status;
+                    if (now - o.timestamp > twelveMinutesInMs) {
+                        currentStatus = "Successful";
+                    }
+
+                    const statusColor = currentStatus === "Successful" ? "#55efc4" : "#ffeaa7";
+
+                    return `
+                        <tr>
+                            <td style="font-size: 0.65rem;">${o.date}</td>
+                            <td>${o.crypto}</td>
+                            <td style="color:#fab1a0">${o.amount}</td>
+                            <td style="color:${statusColor}; font-weight: bold;">${currentStatus}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        // প্রতি ১ মিনিটে হিস্ট্রি রিফ্রেশ হবে যাতে স্ট্যাটাস আপডেট চেক হয়
+        setInterval(renderHistory, 60000);
+
+        window.onload = renderHistory;
+    </script>
+</body>
+</html>
