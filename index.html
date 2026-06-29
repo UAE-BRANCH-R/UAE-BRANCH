@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE BRANCH | Pre-Listing Crypto Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:linear-gradient(135deg,#060d1a 0%,#0b1e35 40%,#0d2b4a 100%);background-attachment:fixed;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;color:#fff;padding:24px 16px}
+.main-container{display:flex;gap:20px;width:100%;max-width:1100px;flex-wrap:wrap;justify-content:center}
+.glass-card,.history-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border-radius:20px;border:1px solid rgba(255,255,255,0.09);box-shadow:0 20px 60px rgba(0,0,0,0.5);padding:28px;flex:1;min-width:310px;max-width:490px}
+.glass-card{text-align:center}
+.brand-logo{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;border:2px solid rgba(100,200,255,0.3);object-fit:cover}
+.brand-name{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.5px;margin-bottom:4px}
+.tagline{color:rgba(255,255,255,0.4);font-size:0.78rem;margin-bottom:4px;letter-spacing:1.5px;text-transform:uppercase}
+.pre-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(251,191,36,0.15),rgba(239,68,68,0.1));border:1px solid rgba(251,191,36,0.35);border-radius:20px;padding:4px 12px;font-size:0.65rem;color:#fbbf24;margin-bottom:6px;font-weight:700;letter-spacing:1px}
+.pre-badge .dot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.divider{height:1px;background:rgba(255,255,255,0.07);margin:16px 0}
+.ticker-wrap{overflow:hidden;margin-bottom:16px;border-radius:8px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.07);padding:7px 0}
+.ticker{display:flex;gap:32px;white-space:nowrap;animation:scroll 36s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{font-size:0.7rem;color:rgba(255,255,255,0.55);font-weight:500}
+.ticker-item .up{color:#34d399}.ticker-item .down{color:#f87171}
+.crypto-grid-label{display:flex;align-items:center;gap:8px;text-align:left;font-size:0.72rem;margin-bottom:10px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0.8px;text-transform:uppercase}
+.step-num{width:18px;height:18px;border-radius:50%;background:rgba(56,189,248,0.2);border:1px solid rgba(56,189,248,0.4);display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;color:#38bdf8;font-weight:700;flex-shrink:0}
+.crypto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;max-height:320px;overflow-y:auto;padding-right:2px}
+.crypto-grid::-webkit-scrollbar{width:3px}.crypto-grid::-webkit-scrollbar-track{background:transparent}.crypto-grid::-webkit-scrollbar-thumb{background:rgba(56,189,248,0.3);border-radius:2px}
+.crypto-card{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 8px;cursor:pointer;transition:all 0.2s;text-align:center;position:relative}
+.crypto-card:hover{background:rgba(56,189,248,0.1);border-color:rgba(56,189,248,0.4);transform:translateY(-2px)}
+.crypto-card.selected{background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.6);box-shadow:0 0 16px rgba(56,189,248,0.2)}
+.crypto-card .c-sym{font-size:0.88rem;font-weight:800;color:#fff;margin-bottom:2px}
+.crypto-card .c-name{font-size:0.52rem;color:rgba(255,255,255,0.35);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crypto-card .c-price{font-size:0.75rem;font-weight:700;color:#fbbf24}
+.crypto-card .c-chg{font-size:0.6rem;font-weight:600;margin-top:1px}
+.c-chg.up{color:#34d399}.c-chg.down{color:#f87171}
+.pre-tag{position:absolute;top:4px;right:4px;background:rgba(251,191,36,0.2);border:1px solid rgba(251,191,36,0.4);border-radius:4px;font-size:0.45rem;color:#fbbf24;padding:1px 4px;font-weight:700}
+.step-label{display:flex;align-items:center;gap:8px;text-align:left;font-size:0.72rem;margin-bottom:7px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0.8px;text-transform:uppercase}
+.input-style{background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.1)!important;color:#fff!important;border-radius:10px!important;padding:11px 14px!important;margin-bottom:14px;font-size:0.85rem;transition:border 0.2s;width:100%}
+.input-style:focus{outline:none!important;border-color:rgba(56,189,248,0.5)!important;background:rgba(255,255,255,0.09)!important}
+.input-error{border:1.5px solid rgba(248,113,113,0.7)!important;background:rgba(248,113,113,0.08)!important}
+.error-text{color:#f87171;font-size:0.7rem;text-align:left;margin-top:-11px;margin-bottom:10px;display:none}
+
+/* Coin receive box */
+.receive-box{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:12px 16px;margin-bottom:14px;display:none;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.receive-box .r-label{font-size:0.6rem;color:rgba(52,211,153,0.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;font-weight:600}
+.receive-box .r-amount{font-size:1.3rem;font-weight:800;color:#34d399}
+.receive-box .r-sym{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:6px;font-weight:500}
+.receive-box .r-rate{font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:3px}
+
+.pay-section{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;margin:12px 0 14px}
+.pay-label{font-size:0.65rem;color:rgba(56,189,248,0.8);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+.pay-id{font-size:1.5rem;font-weight:800;color:#fbbf24;cursor:pointer;letter-spacing:1px;transition:opacity 0.2s}
+.pay-id:hover{opacity:0.75}
+.pay-note{font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:3px}
+.pay-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);border-radius:20px;padding:3px 10px;font-size:0.65rem;color:#38bdf8;margin-bottom:10px}
+.pay-badge .dot2{width:6px;height:6px;border-radius:50%;background:#34d399;animation:blink 1.5s infinite}
+.upload-box{border:1.5px dashed rgba(255,255,255,0.12);padding:10px;border-radius:10px;margin-bottom:14px;background:rgba(255,255,255,0.02)}
+.btn-buy{background:linear-gradient(90deg,#0ea5e9,#6366f1);border:none;color:#fff;font-weight:700;padding:13px;border-radius:10px;width:100%;transition:all 0.25s;font-size:0.9rem;cursor:pointer}
+.btn-buy:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-buy:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.success-msg{margin-top:14px;padding:12px;border-radius:10px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#34d399;font-size:0.82rem;display:none}
+.history-card h3{font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:center;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.stats-row{display:flex;gap:10px;margin-bottom:18px}
+.stat-box{flex:1;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px 12px;text-align:center}
+.stat-val{font-size:1.1rem;font-weight:700;color:#38bdf8}
+.stat-lbl{font-size:0.6rem;color:rgba(255,255,255,0.35);margin-top:2px;text-transform:uppercase;letter-spacing:0.8px}
+.empty-state{text-align:center;padding:30px 20px;color:rgba(255,255,255,0.2);font-size:0.82rem}
+.badge-pending{background:rgba(251,191,36,0.15);color:#fbbf24;border-radius:6px;padding:2px 8px;font-size:0.65rem;font-weight:600}
+.badge-success{background:rgba(52,211,153,0.15);color:#34d399;border-radius:6px;padding:2px 8px;font-size:0.65rem;font-weight:600}
+.crypto-chip{display:inline-block;background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.3);border-radius:6px;padding:1px 7px;font-size:0.7rem;color:#a5b4fc;font-weight:600}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal-box{background:linear-gradient(145deg,#0d1f38,#0b172d);border:1px solid rgba(56,189,248,0.2);border-radius:20px;width:100%;max-width:580px;max-height:92vh;overflow-y:auto}
+.modal-header{padding:20px 24px 0;display:flex;justify-content:space-between;align-items:flex-start}
+.modal-close{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(248,113,113,0.2)}
+.modal-coin-info{display:flex;align-items:center;gap:14px}
+.modal-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.modal-coin-name{font-size:1.3rem;font-weight:800}
+.modal-coin-full{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:1px}
+.modal-price-row{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+.modal-price{font-size:1.8rem;font-weight:800;color:#fbbf24}
+.modal-chg-badge{padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700}
+.modal-chg-badge.up{background:rgba(52,211,153,0.15);color:#34d399}
+.modal-chg-badge.down{background:rgba(248,113,113,0.15);color:#f87171}
+.modal-body{padding:16px 24px 24px}
+.chart-container{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px;margin-bottom:16px}
+.chart-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.chart-tabs{display:flex;gap:6px}
+.chart-tab{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-size:0.65rem;padding:4px 10px;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.15s}
+.chart-tab.active{background:rgba(56,189,248,0.2);border-color:rgba(56,189,248,0.4);color:#38bdf8}
+.chart-legend{display:flex;gap:10px;font-size:0.58rem;color:rgba(255,255,255,0.4)}
+.chart-legend span{display:flex;align-items:center;gap:4px}
+.leg-buy{width:8px;height:8px;background:#34d399;border-radius:50%}
+.leg-sell{width:8px;height:8px;background:#f87171;border-radius:50%}
+canvas#priceChart{width:100%;height:180px;display:block;cursor:crosshair}
+.chart-tooltip{position:absolute;background:rgba(10,20,40,0.95);border:1px solid rgba(56,189,248,0.3);border-radius:8px;padding:6px 10px;font-size:0.65rem;color:#fff;pointer-events:none;display:none;z-index:10}
+.modal-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.modal-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px 12px}
+.modal-stat .lbl{font-size:0.58rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.modal-stat .val{font-size:0.85rem;font-weight:700}
+.modal-desc{font-size:0.77rem;color:rgba(255,255,255,0.5);line-height:1.65;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin-bottom:12px}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.modal-tag{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.25);border-radius:6px;padding:3px 9px;font-size:0.62rem;color:#a5b4fc;font-weight:600}
+.modal-tag.gold{background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.25);color:#fbbf24}
+.modal-listing-bar{background:rgba(0,0,0,0.25);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:0.72rem;margin-bottom:0}
+.btn-select-modal{background:linear-gradient(90deg,#0ea5e9,#6366f1);border:none;color:#fff;font-weight:700;padding:11px;border-radius:10px;width:100%;cursor:pointer;font-size:0.85rem;margin-top:14px;transition:all 0.2s}
+.btn-select-modal:hover{opacity:0.85;transform:translateY(-1px)}
+.chart-wrap{position:relative}
+@media(max-width:480px){.glass-card,.history-card{padding:20px;min-width:100%}.crypto-grid{grid-template-columns:repeat(2,1fr)}.modal-stats-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="main-container">
+  <div class="glass-card">
+    <img src="photo_2026-04-10_10-03-31.jpg" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
+    <h1 class="brand-name">UAE BRANCH</h1>
+    <p class="tagline">Pre-Listing Crypto Exchange</p>
+    <div class="pre-badge"><span class="dot"></span> PRE-LISTING ONLY — NOT ON BINANCE YET</div>
+    <div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+    <div class="divider"></div>
+
+    <div class="step-label"><span class="step-num">1</span> Payment Method</div>
+    <select class="input-style" id="paymentMethod">
+      <option value="Binance Pay">💳 Binance Pay</option>
+      <option value="USDT TRC20">🔷 USDT (TRC20)</option>
+      <option value="BTC">₿ Bitcoin (BTC)</option>
+    </select>
+
+    <div class="step-label"><span class="step-num">2</span> Your Email Address</div>
+    <input type="email" class="input-style" id="userEmail" placeholder="you@example.com">
+
+    <div class="crypto-grid-label"><span class="step-num">3</span> Select Crypto &nbsp;<span style="color:rgba(251,191,36,0.6);font-size:0.58rem;font-weight:500">(click card for chart & details)</span></div>
+    <div class="crypto-grid" id="cryptoGrid"></div>
+    <input type="hidden" id="cryptoToBuy" value="">
+
+    <div class="step-label"><span class="step-num">4</span> Amount (USD)</div>
+    <input type="number" class="input-style" id="amount" placeholder="Minimum $18" oninput="handleAmountInput()">
+    <div id="amountError" class="error-text">⚠ Minimum order amount is $18</div>
+
+    <!-- YOU WILL RECEIVE BOX -->
+    <div class="receive-box" id="receiveBox">
+      <div class="r-label">🎁 You will receive approximately</div>
+      <div><span class="r-amount" id="receiveAmt">0</span><span class="r-sym" id="receiveSym">coins</span></div>
+      <div class="r-rate" id="receiveRate"></div>
+    </div>
+
+    <div class="pay-section">
+      <div class="pay-badge"><span class="dot2"></span> Live Payment ID</div>
+      <div class="pay-label" id="methodLabel">BINANCE PAY — SEND TO</div>
+      <div class="pay-id" onclick="copyID()" title="Click to copy">1130983375</div>
+      <div class="pay-note">Tap ID to copy · Confirm before sending</div>
+    </div>
+
+    <div class="step-label"><span class="step-num">5</span> Upload Payment Screenshot</div>
+    <div class="upload-box">
+      <input type="file" id="screenshot" style="background:transparent;border:none;color:rgba(255,255,255,0.6);font-size:0.8rem;width:100%;cursor:pointer" accept="image/*">
+    </div>
+    <button class="btn-buy" onclick="handlePurchase()" id="submitBtn">Verify &amp; Submit Order →</button>
+    <div id="successMessage" class="success-msg">✅ Order submitted! Your crypto will be delivered after verification — usually within 10–15 minutes.</div>
+  </div>
+
+  <div class="history-card">
+    <h3>My Orders</h3>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="statTotal">$0</div><div class="stat-lbl">Total Spent</div></div>
+      <div class="stat-box"><div class="stat-val" id="statCount">0</div><div class="stat-lbl">Orders</div></div>
+      <div class="stat-box"><div class="stat-val" id="statSuccess">0</div><div class="stat-lbl">Completed</div></div>
+    </div>
+    <div id="emptyState" class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:10px;opacity:0.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>No orders yet.<br>Submit your first order to get started.</div>
+    </div>
+    <table id="historyTable" style="display:none;width:100%;font-size:0.73rem;border-collapse:separate;border-spacing:0 6px">
+      <thead><tr>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Date</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Asset</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Amount</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Coins</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Status</th>
+      </tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="coinModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-coin-info">
+        <div class="modal-icon" id="mIcon"></div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="modal-coin-name" id="mName"></div>
+            <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);border-radius:5px;font-size:0.55rem;color:#fbbf24;padding:2px 6px;font-weight:700">PRE-LISTING</span>
+          </div>
+          <div class="modal-coin-full" id="mFull"></div>
+          <div class="modal-price-row">
+            <div class="modal-price" id="mPrice"></div>
+            <div class="modal-chg-badge" id="mChgBadge"></div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="chart-container">
+        <div class="chart-top-row">
+          <div class="chart-tabs">
+            <button class="chart-tab active" onclick="switchTab(this,'1D')">1D</button>
+            <button class="chart-tab" onclick="switchTab(this,'1W')">1W</button>
+            <button class="chart-tab" onclick="switchTab(this,'1M')">1M</button>
+            <button class="chart-tab" onclick="switchTab(this,'3M')">3M</button>
+          </div>
+          <div class="chart-legend">
+            <span><span class="leg-buy"></span>Buy Signal</span>
+            <span><span class="leg-sell"></span>Sell Signal</span>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="priceChart" width="520" height="180"></canvas>
+          <div class="chart-tooltip" id="chartTooltip"></div>
+        </div>
+      </div>
+      <div class="modal-stats-grid" id="mStatsGrid"></div>
+      <div class="modal-tags" id="mTags"></div>
+      <div class="modal-desc" id="mDesc"></div>
+      <div class="modal-listing-bar">
+        <div style="font-size:1.1rem">🔔</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.6)" id="mListing"></div>
+      </div>
+      <button class="btn-select-modal" onclick="selectCoinFromModal()">Select This Coin &amp; Buy →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const COINS = [
+  {sym:'MONAD',name:'Monad',emoji:'🟣',color:'#8b5cf6',price:0.47,chg:+8.3,mcap:'$312M',supply:'2.1B',vol24h:'$28M',ath:'$0.91',atl:'$0.12',tags:['Layer-1','EVM-Parallel','High TPS'],desc:'Monad is a high-performance Layer-1 with parallel EVM execution, capable of 10,000+ TPS while maintaining full Ethereum compatibility. A top-tier pre-listing opportunity before its anticipated Binance debut.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Currently pre-listing only'},
+  {sym:'BERA',name:'Berachain',emoji:'🐻',color:'#f59e0b',price:0.63,chg:+5.7,mcap:'$480M',supply:'1.5B',vol24h:'$41M',ath:'$0.91',atl:'$0.19',tags:['DeFi','Proof-of-Liquidity','EVM'],desc:'Berachain introduces Proof-of-Liquidity (PoL), a novel consensus mechanism that rewards validators who provide DeFi liquidity. Built on a tri-token model (BERA, BGT, HONEY) for deep, sustainable liquidity.',listing:'Expected Binance listing: <strong>Q2–Q3 2025</strong> · Currently pre-listing only'},
+  {sym:'ZKML',name:'ZK Machine Learning',emoji:'🤖',color:'#06b6d4',price:0.29,chg:+12.1,mcap:'$95M',supply:'500M',vol24h:'$8.4M',ath:'$0.54',atl:'$0.12',tags:['ICO','Zero-Knowledge','AI On-chain'],desc:'ZKML combines zero-knowledge proofs with on-chain AI inference — enabling verifiable, privacy-preserving ML computation. Currently in private ICO phase with massive upside before any CEX listing.',listing:'ICO Phase Active · <strong>CEX listing TBA 2025</strong> · Get in early'},
+  {sym:'NEXUS',name:'Nexus Network',emoji:'🌐',color:'#10b981',price:0.38,chg:-2.4,mcap:'$145M',supply:'800M',vol24h:'$12M',ath:'$0.67',atl:'$0.15',tags:['ZK-Proof','Verifiable Compute','Web3'],desc:'Nexus Network is building the world\'s first supercomputer for zero-knowledge proofs, aggregating computing power globally so any developer can generate ZK proofs at massive scale. Tier-1 VC backed.',listing:'Expected CEX listing: <strong>Late 2025</strong> · Pre-listing access only'},
+  {sym:'INIT',name:'Initia Protocol',emoji:'🏗️',color:'#6366f1',price:0.72,chg:+3.9,mcap:'$520M',supply:'900M',vol24h:'$35M',ath:'$0.91',atl:'$0.28',tags:['Omni-rollup','Cosmos','DeFi'],desc:'Initia is an omni-rollup Layer-1 on Cosmos that unifies fragmented blockchain ecosystems with MoveVM + WasmVM support and native liquidity bridging. Backed by Binance Labs — listing imminent.',listing:'Binance listing: <strong>Imminent</strong> · Only available pre-listing here'},
+  {sym:'HAEDAL',name:'Haedal Protocol',emoji:'🌊',color:'#0ea5e9',price:0.19,chg:+18.5,mcap:'$78M',supply:'420M',vol24h:'$5.2M',ath:'$0.38',atl:'$0.12',tags:['Liquid Staking','Sui','DeFi'],desc:'Haedal is the leading liquid staking protocol on Sui, enabling users to stake SUI while maintaining liquidity via haSUI tokens. With Sui\'s rapid ecosystem growth, Haedal is the go-to DeFi primitive.',listing:'Expected Binance listing: <strong>Q4 2025</strong> · Pre-listing phase now'},
+  {sym:'VELO',name:'Velo Protocol',emoji:'⚡',color:'#f97316',price:0.34,chg:+6.1,mcap:'$110M',supply:'650M',vol24h:'$9.8M',ath:'$0.61',atl:'$0.13',tags:['Cross-chain','Yield','DeFi 3.0'],desc:'Velo Protocol enables cross-chain yield optimization using AI-driven liquidity routing. It automatically moves funds across 12+ chains to maximize APY with one-click deployment. Next-gen DeFi 3.0 primitive.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Pre-listing only'},
+  {sym:'LUMIA',name:'Lumia Chain',emoji:'💎',color:'#a855f7',price:0.58,chg:-1.8,mcap:'$230M',supply:'1.1B',vol24h:'$18M',ath:'$0.83',atl:'$0.21',tags:['RWA','Tokenization','L2'],desc:'Lumia Chain is a purpose-built Layer-2 for real-world asset tokenization, enabling fractional ownership of real estate, commodities, and private equity on-chain with institutional-grade compliance built in.',listing:'Expected Binance listing: <strong>Q4 2025</strong> · Pre-listing access only'},
+  {sym:'DRIFT',name:'Drift Protocol',emoji:'🌀',color:'#22d3ee',price:0.43,chg:+9.2,mcap:'$175M',supply:'750M',vol24h:'$22M',ath:'$0.79',atl:'$0.16',tags:['Perps DEX','Solana','Trading'],desc:'Drift is the leading perpetuals DEX on Solana with cross-margin trading, up to 20x leverage, and a virtual AMM engine. Processing $2B+ monthly volume — the fastest perps protocol in Web3.',listing:'Expected CEX listing: <strong>Q3 2025</strong> · Pre-listing only here'},
+  {sym:'NOVA',name:'Nova Finance',emoji:'🌟',color:'#fbbf24',price:0.26,chg:+14.3,mcap:'$88M',supply:'400M',vol24h:'$7.1M',ath:'$0.48',atl:'$0.12',tags:['ICO','Yield Aggregator','Multi-chain'],desc:'Nova Finance is an ICO-stage multi-chain yield aggregator that auto-compounds yields across 20+ protocols. AI-powered vault strategies deliver 40–120% APY without manual rebalancing. Early investors only.',listing:'ICO Live · <strong>Exchange listing TBA Q4 2025</strong> · Buy before listing'},
+  {sym:'QUAI',name:'Quai Network',emoji:'🔷',color:'#3b82f6',price:0.51,chg:+4.5,mcap:'$290M',supply:'1.8B',vol24h:'$24M',ath:'$0.88',atl:'$0.18',tags:['PoW Sharding','Layer-1','Scalable'],desc:'Quai Network is a sharded Proof-of-Work Layer-1 that achieves Bitcoin-level security with Ethereum-level programmability. Its merged-mining design enables 50,000+ TPS across 13 shards simultaneously.',listing:'Expected Binance listing: <strong>Q2 2025</strong> · Pre-listing now'},
+  {sym:'PLUME',name:'Plume Network',emoji:'🪶',color:'#ec4899',price:0.37,chg:+7.8,mcap:'$155M',supply:'700M',vol24h:'$13M',ath:'$0.69',atl:'$0.14',tags:['RWA','Modular L2','EVM'],desc:'Plume Network is the first modular L2 built exclusively for real-world assets, with embedded KYC, compliance rails, and native RWA primitives. 180+ projects already building on Plume mainnet.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Pre-listing only'}
+];
+
+const STORAGE_KEY='uae_orders_v7';
+let orders=[];
+try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){orders=[];}
+let selectedCoin=null;
+let currentChartSym=null;
+let chartPrices=[];
+
+// TICKER
+function buildTicker(){
+  const t=document.getElementById('ticker');
+  const items=COINS.map(c=>`<span class="ticker-item">${c.emoji} ${c.sym} <strong>$${c.price.toFixed(2)}</strong> <span class="${c.chg>=0?'up':'down'}">${c.chg>=0?'+':''}${c.chg}%</span></span>`);
+  t.innerHTML=[...items,...items].join('');
+}
+
+// GRID
+function buildGrid(){
+  const g=document.getElementById('cryptoGrid');
+  g.innerHTML=COINS.map(c=>`
+    <div class="crypto-card" id="card-${c.sym}" onclick="openModal('${c.sym}')">
+      <div class="pre-tag">PRE</div>
+      <div class="c-sym">${c.emoji} ${c.sym}</div>
+      <div class="c-name">${c.name}</div>
+      <div class="c-price">$${c.price.toFixed(2)}</div>
+      <div class="c-chg ${c.chg>=0?'up':'down'}">${c.chg>=0?'+':''}${c.chg}%</div>
+    </div>`).join('');
+}
+
+// AMOUNT INPUT — calculate coins
+function handleAmountInput(){
+  const inp=document.getElementById('amount');
+  const err=document.getElementById('amountError');
+  const v=parseFloat(inp.value);
+  if(inp.value&&v<18){inp.classList.add('input-error');err.style.display='block';}
+  else{inp.classList.remove('input-error');err.style.display='none';}
+  updateReceiveBox();
+}
+
+function updateReceiveBox(){
+  const box=document.getElementById('receiveBox');
+  const amt=parseFloat(document.getElementById('amount').value);
+  if(!selectedCoin||isNaN(amt)||amt<1){box.style.display='none';return;}
+  const coin=COINS.find(c=>c.sym===selectedCoin);
+  if(!coin){box.style.display='none';return;}
+  const coins=(amt/coin.price);
+  document.getElementById('receiveAmt').textContent=coins>=1000?coins.toFixed(0):coins>=1?coins.toFixed(2):coins.toFixed(4);
+  document.getElementById('receiveSym').textContent=coin.sym;
+  document.getElementById('receiveRate').textContent=`1 ${coin.sym} = $${coin.price.toFixed(2)} USD  ·  Rate locked at current pre-listing price`;
+  box.style.display='block';
+}
+
+// MODAL
+function openModal(sym){
+  const coin=COINS.find(c=>c.sym===sym);
+  if(!coin)return;
+  currentChartSym=sym;
+  document.getElementById('mIcon').style.cssText=`background:linear-gradient(135deg,${coin.color}33,${coin.color}11);border:1.5px solid ${coin.color}44`;
+  document.getElementById('mIcon').textContent=coin.emoji;
+  document.getElementById('mName').textContent=coin.sym;
+  document.getElementById('mFull').textContent=coin.name;
+  document.getElementById('mPrice').textContent='$'+coin.price.toFixed(2);
+  const badge=document.getElementById('mChgBadge');
+  badge.textContent=(coin.chg>=0?'+':'')+coin.chg+'%';
+  badge.className='modal-chg-badge '+(coin.chg>=0?'up':'down');
+  document.getElementById('mStatsGrid').innerHTML=[
+    {l:'Market Cap',v:coin.mcap,c:'#38bdf8'},{l:'24h Volume',v:coin.vol24h,c:'#a5b4fc'},
+    {l:'Supply',v:coin.supply,c:'#fff'},{l:'ATH Price',v:coin.ath,c:'#34d399'},
+    {l:'ATL Price',v:coin.atl,c:'#f87171'},{l:'24h Change',v:(coin.chg>=0?'+':'')+coin.chg+'%',c:coin.chg>=0?'#34d399':'#f87171'}
+  ].map(s=>`<div class="modal-stat"><div class="lbl">${s.l}</div><div class="val" style="color:${s.c}">${s.v}</div></div>`).join('');
+  document.getElementById('mTags').innerHTML=coin.tags.map((t,i)=>`<span class="modal-tag ${i===0?'gold':''}">${t}</span>`).join('');
+  document.getElementById('mDesc').textContent=coin.desc;
+  document.getElementById('mListing').innerHTML=coin.listing;
+  document.getElementById('coinModal').dataset.sym=sym;
+  document.getElementById('coinModal').classList.add('open');
+  // reset tabs
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.chart-tab')[0].classList.add('active');
+  setTimeout(()=>drawChart(coin,'1D'),60);
+}
+
+function closeModal(){document.getElementById('coinModal').classList.remove('open');}
+function handleOverlayClick(e){if(e.target===document.getElementById('coinModal'))closeModal();}
+function selectCoinFromModal(){
+  const sym=document.getElementById('coinModal').dataset.sym;
+  selectCoin(sym);closeModal();
+}
+function selectCoin(sym){
+  selectedCoin=sym;
+  document.getElementById('cryptoToBuy').value=sym;
+  document.querySelectorAll('.crypto-card').forEach(c=>c.classList.remove('selected'));
+  const card=document.getElementById('card-'+sym);
+  if(card)card.classList.add('selected');
+  updateReceiveBox();
+}
+function switchTab(btn,tab){
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const sym=document.getElementById('coinModal').dataset.sym;
+  const coin=COINS.find(c=>c.sym===sym);
+  if(coin)drawChart(coin,tab);
+}
+
+// CHART with Buy/Sell signals
+function seededR(seed,i){return((Math.sin(seed*i*7919+31337)*134775813)%1+1)%1;}
+function genPrices(coin,period){
+  const pts={'1D':60,'1W':84,'1M':120,'3M':180}[period]||60;
+  const seed=coin.sym.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const prices=[];
+  let p=coin.price*(0.82+seededR(seed,0)*0.14);
+  const atl=parseFloat(coin.atl)*0.88, ath=parseFloat(coin.ath)*1.04;
+  for(let i=0;i<pts;i++){
+    const trend=(coin.price-p)*0.04;
+    const noise=(seededR(seed,i+period.length*13)-0.47)*coin.price*0.028;
+    p=Math.max(atl,Math.min(ath,p+trend+noise));
+    prices.push(parseFloat(p.toFixed(4)));
+  }
+  prices.push(coin.price);
+  return prices;
+}
+
+function drawChart(coin,period){
+  const canvas=document.getElementById('priceChart');
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.clientWidth||520,H=180;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+  const prices=genPrices(coin,period);
+  chartPrices=prices;
+  const mn=Math.min(...prices),mx=Math.max(...prices);
+  const pad={t:18,b:26,l:6,r:50};
+  const uw=W-pad.l-pad.r,uh=H-pad.t-pad.b;
+  const xOf=i=>pad.l+(i/(prices.length-1))*uw;
+  const yOf=v=>pad.t+(1-(v-mn)/(mx-mn||0.001))*uh;
+  const isUp=coin.chg>=0;
+
+  // Grid + price labels on right
+  const gridLevels=4;
+  ctx.font=`9px Inter`;ctx.textAlign='left';
+  for(let i=0;i<=gridLevels;i++){
+    const frac=i/gridLevels;
+    const y=pad.t+frac*uh;
+    const val=mx-(frac*(mx-mn));
+    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r+4,y);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.25)';
+    ctx.fillText('$'+val.toFixed(val<1?3:2),W-pad.r+8,y+3);
+  }
+
+  // Gradient fill
+  const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  grad.addColorStop(0,isUp?'rgba(52,211,153,0.25)':'rgba(248,113,113,0.25)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();
+  ctx.moveTo(xOf(0),H-pad.b);
+  prices.forEach((p,i)=>ctx.lineTo(xOf(i),yOf(p)));
+  ctx.lineTo(xOf(prices.length-1),H-pad.b);
+  ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+
+  // Main line
+  ctx.beginPath();
+  prices.forEach((p,i)=>{if(i===0)ctx.moveTo(xOf(i),yOf(p));else ctx.lineTo(xOf(i),yOf(p));});
+  ctx.strokeStyle=isUp?'#34d399':'#f87171';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();
+
+  // Buy/Sell signals — local minima = buy, local maxima = sell
+  const step=Math.max(3,Math.floor(prices.length/12));
+  for(let i=step;i<prices.length-step;i+=step){
+    const prev=prices[i-step],curr=prices[i],next=prices[i+step];
+    const x=xOf(i),y=yOf(curr);
+    if(curr<prev&&curr<next){
+      // BUY signal — green triangle up
+      ctx.fillStyle='#34d399';
+      ctx.beginPath();ctx.moveTo(x,y+14);ctx.lineTo(x-5,y+22);ctx.lineTo(x+5,y+22);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(52,211,153,0.9)';ctx.font='bold 7px Inter';ctx.textAlign='center';
+      ctx.fillText('B',x,y+21);
+    } else if(curr>prev&&curr>next){
+      // SELL signal — red triangle down
+      ctx.fillStyle='#f87171';
+      ctx.beginPath();ctx.moveTo(x,y-14);ctx.lineTo(x-5,y-22);ctx.lineTo(x+5,y-22);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(248,113,113,0.9)';ctx.font='bold 7px Inter';ctx.textAlign='center';
+      ctx.fillText('S',x,y-15);
+    }
+  }
+
+  // Current price dot + glow
+  const lx=xOf(prices.length-1),ly=yOf(prices[prices.length-1]);
+  ctx.shadowColor=isUp?'#34d399':'#f87171';ctx.shadowBlur=10;
+  ctx.beginPath();ctx.arc(lx,ly,4,0,Math.PI*2);ctx.fillStyle=isUp?'#34d399':'#f87171';ctx.fill();
+  ctx.shadowBlur=0;
+  ctx.beginPath();ctx.arc(lx,ly,9,0,Math.PI*2);ctx.fillStyle=isUp?'rgba(52,211,153,0.18)':'rgba(248,113,113,0.18)';ctx.fill();
+
+  // Hover crosshair
+  setupChartHover(canvas,coin,prices,xOf,yOf,pad,W,H,mn,mx,dpr);
+}
+
+function setupChartHover(canvas,coin,prices,xOf,yOf,pad,W,H,mn,mx,dpr){
+  const tooltip=document.getElementById('chartTooltip');
+  const wrap=canvas.parentElement;
+  canvas.onmousemove=function(e){
+    const rect=canvas.getBoundingClientRect();
+    const mx2=e.clientX-rect.left;
+    const idx=Math.round((mx2-pad.l)/((W-pad.l-50)/(prices.length-1)));
+    const cIdx=Math.max(0,Math.min(prices.length-1,idx));
+    const px=prices[cIdx];
+    const isUp=coin.chg>=0;
+    tooltip.style.display='block';
+    tooltip.style.left=(xOf(cIdx)+12)+'px';
+    tooltip.style.top=(yOf(px)-10)+'px';
+    tooltip.innerHTML=`<strong>$${px.toFixed(px<1?3:2)}</strong><br><span style="color:rgba(255,255,255,0.4);font-size:0.6rem">Point ${cIdx+1} of ${prices.length}</span>`;
+    tooltip.style.borderColor=isUp?'rgba(52,211,153,0.4)':'rgba(248,113,113,0.4)';
+  };
+  canvas.onmouseleave=()=>{tooltip.style.display='none';};
+}
+
+// PAYMENT METHOD
+document.getElementById('paymentMethod').addEventListener('change',function(){
+  const map={'Binance Pay':'BINANCE PAY — SEND TO','USDT TRC20':'USDT TRC20 — WALLET ADDRESS','BTC':'BITCOIN — WALLET ADDRESS'};
+  document.getElementById('methodLabel').textContent=map[this.value]||'SEND TO';
+});
+
+function copyID(){
+  navigator.clipboard.writeText('1130983375').then(()=>{
+    const el=document.querySelector('.pay-id');const orig=el.textContent;
+    el.textContent='✓ Copied!';el.style.color='#34d399';
+    setTimeout(()=>{el.textContent=orig;el.style.color='';},2000);
+  });
+}
+
+function handlePurchase(){
+  const email=document.getElementById('userEmail').value.trim();
+  const crypto=document.getElementById('cryptoToBuy').value;
+  const amount=parseFloat(document.getElementById('amount').value);
+  const file=document.getElementById('screenshot').files.length;
+  const btn=document.getElementById('submitBtn');
+  if(!crypto){alert('Please select a cryptocurrency from the grid.');return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+  if(isNaN(amount)||amount<18){alert('Minimum order amount is $18.');return;}
+  if(file===0){alert('Please upload your payment screenshot.');return;}
+  const coin=COINS.find(c=>c.sym===crypto);
+  const coinsQty=amount/coin.price;
+  btn.textContent='Verifying payment...';btn.disabled=true;
+  setTimeout(()=>{
+    const now=Date.now();
+    orders.unshift({id:now,timestamp:now,date:new Date().toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),crypto,amount,coins:coinsQty,status:'Pending'});
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(orders.slice(0,20)));}catch(e){}
+    renderHistory();
+    document.getElementById('successMessage').style.display='block';
+    btn.textContent='Verify & Submit Order →';btn.disabled=false;
+    document.getElementById('amount').value='';
+    document.getElementById('screenshot').value='';
+    document.getElementById('userEmail').value='';
+    document.getElementById('amount').classList.remove('input-error');
+    document.getElementById('amountError').style.display='none';
+    document.getElementById('receiveBox').style.display='none';
+    selectedCoin=null;document.getElementById('cryptoToBuy').value='';
+    document.querySelectorAll('.crypto-card').forEach(c=>c.classList.remove('selected'));
+    setTimeout(()=>{document.getElementById('successMessage').style.display='none';},8000);
+  },2200);
+}
+
+function renderHistory(){
+  const body=document.getElementById('historyBody'),table=document.getElementById('historyTable'),empty=document.getElementById('emptyState');
+  const now=Date.now(),CONFIRM_MS=12*60*1000;
+  if(orders.length===0){empty.style.display='block';table.style.display='none';return;}
+  empty.style.display='none';table.style.display='table';
+  let totalSpent=0,completed=0;
+  body.innerHTML=orders.map(o=>{
+    const status=(now-o.timestamp>CONFIRM_MS)?'Completed':o.status;
+    const badge=status==='Completed'?`<span class="badge-success">Completed</span>`:`<span class="badge-pending">Pending</span>`;
+    if(status==='Completed')completed++;
+    totalSpent+=parseFloat(o.amount)||0;
+    const qty=o.coins?(o.coins>=1000?parseFloat(o.coins).toFixed(0):o.coins>=1?parseFloat(o.coins).toFixed(2):parseFloat(o.coins).toFixed(4)):'—';
+    return `<tr style="background:rgba(255,255,255,0.04)">
+      <td style="padding:9px 8px;font-size:0.66rem;color:rgba(255,255,255,0.4);border-radius:8px 0 0 8px">${o.date}</td>
+      <td style="padding:9px 8px"><span class="crypto-chip">${o.crypto}</span></td>
+      <td style="padding:9px 8px;color:#fbbf24;font-weight:600">$${parseFloat(o.amount).toFixed(2)}</td>
+      <td style="padding:9px 8px;color:#34d399;font-weight:600;font-size:0.7rem">${qty}</td>
+      <td style="padding:9px 8px;border-radius:0 8px 8px 0">${badge}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('statTotal').textContent='$'+totalSpent.toFixed(0);
+  document.getElementById('statCount').textContent=orders.length;
+  document.getElementById('statSuccess').textContent=completed;
+}
+
+buildTicker();buildGrid();renderHistory();
+setInterval(renderHistory,60000);
+</script>
+</body>
+</html>
