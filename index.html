@@ -79,13 +79,100 @@ body{background:linear-gradient(135deg,#060d1a 0%,#0b1e35 40%,#0d2b4a 100%);back
 .receive-box .r-sym{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:6px;font-weight:500}
 .receive-box .r-rate{font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:3px}
 
-.pay-section{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;margin:12px 0 14px}
-.pay-label{font-size:0.65rem;color:rgba(56,189,248,0.8);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;font-weight:600}
-.pay-id{font-size:1.5rem;font-weight:800;color:#fbbf24;cursor:pointer;letter-spacing:1px;transition:opacity 0.2s}
-.pay-id:hover{opacity:0.75}
-.pay-note{font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:3px}
-.pay-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);border-radius:20px;padding:3px 10px;font-size:0.65rem;color:#38bdf8;margin-bottom:10px}
-.pay-badge .dot2{width:6px;height:6px;border-radius:50%;background:#34d399;animation:blink 1.5s infinite}
+/* Enhanced Modern Payment Gateway Card */
+.pay-card-container {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.5));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 14px 0 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.pay-card-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+}
+.pay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.pay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.65rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.pay-badge .dot2 {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #34d399;
+  animation: blink 1.5s infinite;
+}
+.pay-method-title {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.pay-address-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pay-address-box:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+.pay-id-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.5px;
+  word-break: break-all;
+  text-align: left;
+}
+.copy-btn-badge {
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+  transition: transform 0.15s;
+}
+.pay-address-box:active .copy-btn-badge {
+  transform: scale(0.95);
+}
+.pay-note {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 8px;
+  text-align: left;
+}
+
 .upload-box{border:1.5px dashed rgba(255,255,255,0.12);padding:10px;border-radius:10px;margin-bottom:14px;background:rgba(255,255,255,0.02)}
 .btn-buy{background:linear-gradient(90deg,#0ea5e9,#6366f1);border:none;color:#fff;font-weight:700;padding:13px;border-radius:10px;width:100%;transition:all 0.25s;font-size:0.9rem;cursor:pointer}
 .btn-buy:hover{opacity:0.88;transform:translateY(-1px)}
@@ -155,10 +242,10 @@ canvas#priceChart{width:100%;height:180px;display:block;cursor:crosshair}
     <div class="divider"></div>
 
     <div class="step-label"><span class="step-num">1</span> Payment Method</div>
-    <select class="input-style" id="paymentMethod">
-      <option value="Binance Pay">💳 Binance Pay</option>
-      <option value="USDT TRC20">🔷 USDT (TRC20)</option>
-      <option value="BTC">₿ Bitcoin (BTC)</option>
+    <!-- Bitcoin removed as requested -->
+    <select class="input-style" id="paymentMethod" onchange="updatePaymentDetails()">
+      <option value="Binance Pay">💳 Binance Pay (Pay ID / UID)</option>
+      <option value="USDT TRC20">🔷 USDT (TRC20 Network)</option>
     </select>
 
     <div class="step-label"><span class="step-num">2</span> Your Email Address</div>
@@ -179,11 +266,19 @@ canvas#priceChart{width:100%;height:180px;display:block;cursor:crosshair}
       <div class="r-rate" id="receiveRate"></div>
     </div>
 
-    <div class="pay-section">
-      <div class="pay-badge"><span class="dot2"></span> Live Payment ID</div>
-      <div class="pay-label" id="methodLabel">BINANCE PAY — SEND TO</div>
-      <div class="pay-id" onclick="copyID()" title="Click to copy">1130983375</div>
-      <div class="pay-note">Tap ID to copy · Confirm before sending</div>
+    <!-- NEW BEAUTIFUL PAYMENT GATEWAY UI -->
+    <div class="pay-card-container">
+      <div class="pay-header">
+        <div class="pay-badge"><span class="dot2"></span> Official Payment Gateway</div>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Auto Verified</span>
+      </div>
+      <div class="pay-method-title" id="methodLabel">BINANCE PAY (UID / PAY ID)</div>
+      
+      <div class="pay-address-box" onclick="copyID()" title="Click to copy">
+        <div class="pay-id-text" id="payIdDisplay">1130983375</div>
+        <div class="copy-btn-badge" id="copyBadge">Copy</div>
+      </div>
+      <div class="pay-note">Tap box to copy address · Double check before sending</div>
     </div>
 
     <div class="step-label"><span class="step-num">5</span> Upload Payment Screenshot</div>
@@ -191,7 +286,7 @@ canvas#priceChart{width:100%;height:180px;display:block;cursor:crosshair}
       <input type="file" id="screenshot" style="background:transparent;border:none;color:rgba(255,255,255,0.6);font-size:0.8rem;width:100%;cursor:pointer" accept="image/*">
     </div>
 
-    <!-- KEY CDF OPTION ADDED HERE -->
+    <!-- KEY CDF OPTION -->
     <div class="step-label"><span class="step-num">6</span> KEY CDF</div>
     <input type="text" class="input-style" id="keyCdf" placeholder="Enter KEY CDF">
     <div id="keyError" class="error-text">⚠ Invalid KEY CDF! Purchase denied.</div>
@@ -280,7 +375,7 @@ const COINS = [
   // NEW ADDED FOCUS COIN - NXS
   {sym:'NXS',name:'NexusX Star',emoji:'⭐',color:'#10b981',price:1.25,chg:+48.5,mcap:'$850M',supply:'100M',vol24h:'$120M',ath:'$3.50',atl:'$0.40',isNxs:true,tags:['⭐ HIGH PROFIT','Quantum AI','Layer-0'],desc:'NexusX Star (NXS) is an ultra-high yield, AI-driven protocol. Top recommended pre-listing opportunity offering maximum projected ROI upon CEX listing.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Extremely High Demand'},
 
-  // Original 12 Coins
+  // Original Coins
   {sym:'MONAD',name:'Monad',emoji:'🟣',color:'#8b5cf6',price:0.47,chg:+8.3,mcap:'$312M',supply:'2.1B',vol24h:'$28M',ath:'$0.91',atl:'$0.12',tags:['Layer-1','EVM-Parallel','High TPS'],desc:'Monad is a high-performance Layer-1 with parallel EVM execution, capable of 10,000+ TPS while maintaining full Ethereum compatibility. A top-tier pre-listing opportunity before its anticipated Binance debut.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Currently pre-listing only'},
   {sym:'BERA',name:'Berachain',emoji:'🐻',color:'#f59e0b',price:0.63,chg:+5.7,mcap:'$480M',supply:'1.5B',vol24h:'$41M',ath:'$0.91',atl:'$0.19',tags:['DeFi','Proof-of-Liquidity','EVM'],desc:'Berachain introduces Proof-of-Liquidity (PoL), a novel consensus mechanism that rewards validators who provide DeFi liquidity. Built on a tri-token model (BERA, BGT, HONEY) for deep, sustainable liquidity.',listing:'Expected Binance listing: <strong>Q2–Q3 2025</strong> · Currently pre-listing only'},
   {sym:'ZKML',name:'ZK Machine Learning',emoji:'🤖',color:'#06b6d4',price:0.29,chg:+12.1,mcap:'$95M',supply:'500M',vol24h:'$8.4M',ath:'$0.54',atl:'$0.12',tags:['ICO','Zero-Knowledge','AI On-chain'],desc:'ZKML combines zero-knowledge proofs with on-chain AI inference — enabling verifiable, privacy-preserving ML computation. Currently in private ICO phase with massive upside before any CEX listing.',listing:'ICO Phase Active · <strong>CEX listing TBA 2025</strong> · Get in early'},
@@ -294,7 +389,7 @@ const COINS = [
   {sym:'QUAI',name:'Quai Network',emoji:'🔷',color:'#3b82f6',price:0.51,chg:+4.5,mcap:'$290M',supply:'1.8B',vol24h:'$24M',ath:'$0.88',atl:'$0.18',tags:['PoW Sharding','Layer-1','Scalable'],desc:'Quai Network is a sharded Proof-of-Work Layer-1 that achieves Bitcoin-level security with Ethereum-level programmability. Its merged-mining design enables 50,000+ TPS across 13 shards simultaneously.',listing:'Expected Binance listing: <strong>Q2 2025</strong> · Pre-listing now'},
   {sym:'PLUME',name:'Plume Network',emoji:'🪶',color:'#ec4899',price:0.37,chg:+7.8,mcap:'$700M',supply:'700M',vol24h:'$13M',ath:'$0.69',atl:'$0.14',tags:['RWA','Modular L2','EVM'],desc:'Plume Network is the first modular L2 built exclusively for real-world assets, with embedded KYC, compliance rails, and native RWA primitives. 180+ projects already building on Plume mainnet.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Pre-listing only'},
 
-  // 50 NEW ADDED COINS (Fictional & Early Pre-Listing Projects)
+  // Additional 50 Coins
   {sym:'AETHER',name:'Aether AI',emoji:'🪐',color:'#60a5fa',price:0.15,chg:+11.4,mcap:'$45M',supply:'1B',vol24h:'$3.5M',ath:'$0.30',atl:'$0.05',tags:['AI','DePIN','Compute'],desc:'Aether AI connects decentralized GPU compute nodes worldwide to train LLMs at a fraction of Web2 cost.',listing:'Pre-listing sale active · CEX listing Q4 2025'},
   {sym:'SOLARIS',name:'Solaris Protocol',emoji:'☀️',color:'#facc15',price:0.82,chg:-3.1,mcap:'$120M',supply:'300M',vol24h:'$9.1M',ath:'$1.20',atl:'$0.40',tags:['Solar Energy','RWA','Green DeFi'],desc:'Solaris tokenizes solar farm yields globally, allowing investors to earn clean energy revenues directly on-chain.',listing:'Pre-listing phase · Major CEX listing imminent'},
   {sym:'HYDRA',name:'HydraX Protocol',emoji:'🐉',color:'#10b981',price:0.09,chg:+22.8,mcap:'$30M',supply:'2B',vol24h:'$4.8M',ath:'$0.18',atl:'$0.02',tags:['Liquidity','DEX','L3'],desc:'HydraX is an ultra-fast L3 application chain focused on zero-slippage derivatives trading and perpetuals.',listing:'Pre-listing active · Gate.io listing target Q3 2025'},
@@ -332,7 +427,7 @@ const COINS = [
   {sym:'ORBITAL',name:'Orbital Finance',emoji:'🛰️',color:'#0ea5e9',price:0.33,chg:+3.1,mcap:'$82M',supply:'550M',vol24h:'$6.1M',ath:'$0.55',atl:'$0.11',tags:['Cross-chain','AMM'],desc:'Orbital connects fragmented liquidity across Solana, Ethereum, and Arbitrum seamlessly.',listing:'Pre-listing available now'},
   {sym:'AQUARIUS',name:'Aquarius Liquidity',emoji:'♒',color:'#06b6d4',price:0.46,chg:-0.9,mcap:'$110M',supply:'500M',vol24h:'$7.9M',ath:'$0.74',atl:'$0.18',tags:['Liquidity Engine'],desc:'Aquarius aggregates deep institutional liquidity to prevent slippage on high-volume DEX trades.',listing:'Pre-listing live'},
   {sym:'PHANTOM',name:'PhantomX',emoji:'👻',color:'#64748b',price:0.24,chg:+17.5,mcap:'$54M',supply:'700M',vol24h:'$5.8M',ath:'$0.40',atl:'$0.06',tags:['Privacy','Shielded Tx'],desc:'PhantomX brings default shielded transaction capabilities to EVM-compatible blockchains.',listing:'Pre-listing access active'},
-  {sym:'ZEN',name:'Zen Protocol',emoji:'🧘',color:'#10b981',price:0.59,chg:+2.2,mcap:'$150M',supply:'400M',vol24h:'$9.8M',ath:'$0.90',atl:'$0.22',tags:['Staking','Yield'],desc:'Zen Protocol offers loss-protected liquid staking products backed by algorithmic insurance.',listing:'Expected CEX listing late 2025'},
+  {sym:'ZEN',name:'Zen Protocol',emoji:'🧘',color:'#10b981',price:0.59,chg:+2.2,mcap:'$150M',supply:'400M',vol24h:'$9.8M',ath:'$0.22',tags:['Staking','Yield'],desc:'Zen Protocol offers loss-protected liquid staking products backed by algorithmic insurance.',listing:'Expected CEX listing late 2025'},
   {sym:'KRAKENX',name:'KrakenX Chain',emoji:'🐙',color:'#3b82f6',price:0.91,chg:+11.8,mcap:'$290M',supply:'500M',vol24h:'$22M',ath:'$1.45',atl:'$0.36',tags:['Layer-1','Institutional'],desc:'KrakenX is a permissioned Layer-1 built specifically for KYC-compliant institutional finance.',listing:'Pre-listing allocation open'},
   {sym:'VALOR',name:'Valor Gold',emoji:'🥇',color:'#eab308',price:1.50,chg:+0.8,mcap:'$500M',supply:'1M',vol24h:'$12M',ath:'$1.80',atl:'$1.20',tags:['Gold Backed','RWA'],desc:'Valor Gold is 100% physically backed by audited gold bullion stored in Swiss vaults.',listing:'Pre-listing purchase active'},
   {sym:'NEXA',name:'Nexa Pay',emoji:'💳',color:'#f472b6',price:0.14,chg:+8.9,mcap:'$35M',supply:'850M',vol24h:'$2.6M',ath:'$0.26',atl:'$0.04',tags:['Payment Rail','Mobile Wallet'],desc:'Nexa Pay is a mobile-first crypto wallet with built-in zero-fee QR payment integration.',listing:'Pre-listing active'},
@@ -361,7 +456,7 @@ function buildTicker(){
   t.innerHTML=[...items,...items].join('');
 }
 
-// GRID - Updated for NXS highlight
+// GRID
 function buildGrid(){
   const g=document.getElementById('cryptoGrid');
   g.innerHTML=COINS.map(c=>`
@@ -373,6 +468,36 @@ function buildGrid(){
       <div class="c-price">$${c.price.toFixed(2)}</div>
       <div class="c-chg ${c.chg>=0?'up':'down'}">${c.chg>=0?'+':''}${c.chg}%</div>
     </div>`).join('');
+}
+
+// DYNAMIC PAYMENT METHOD & ADDRESS DISPLAY
+function updatePaymentDetails(){
+  const method = document.getElementById('paymentMethod').value;
+  const label = document.getElementById('methodLabel');
+  const display = document.getElementById('payIdDisplay');
+
+  if(method === 'USDT TRC20'){
+    label.textContent = 'USDT TRC20 — WALLET ADDRESS';
+    display.textContent = 'TEpfuBwYz4jSRTNioh6zBmsZwbr6PuUVtJ';
+  } else {
+    label.textContent = 'BINANCE PAY (UID / PAY ID)';
+    display.textContent = '1130983375';
+  }
+}
+
+function copyID(){
+  const textToCopy = document.getElementById('payIdDisplay').textContent;
+  const badge = document.getElementById('copyBadge');
+  
+  navigator.clipboard.writeText(textToCopy).then(()=>{
+    const origText = badge.textContent;
+    badge.textContent = '✓ Copied!';
+    badge.style.background = '#34d399';
+    setTimeout(()=>{
+      badge.textContent = origText;
+      badge.style.background = '';
+    }, 2000);
+  });
 }
 
 // AMOUNT INPUT — calculate coins with NXS $198 check
@@ -430,7 +555,6 @@ function openModal(sym){
   document.getElementById('mListing').innerHTML=coin.listing;
   document.getElementById('coinModal').dataset.sym=sym;
   document.getElementById('coinModal').classList.add('open');
-  // reset tabs
   document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.chart-tab')[0].classList.add('active');
   setTimeout(()=>drawChart(coin,'1D'),60);
@@ -448,7 +572,7 @@ function selectCoin(sym){
   document.querySelectorAll('.crypto-card').forEach(c=>c.classList.remove('selected'));
   const card=document.getElementById('card-'+sym);
   if(card)card.classList.add('selected');
-  handleAmountInput(); // Re-validate min amount dynamically
+  handleAmountInput();
   updateReceiveBox();
 }
 function switchTab(btn,tab){
@@ -459,7 +583,7 @@ function switchTab(btn,tab){
   if(coin)drawChart(coin,tab);
 }
 
-// CHART with Buy/Sell signals
+// CHART
 function seededR(seed,i){return((Math.sin(seed*i*7919+31337)*134775813)%1+1)%1;}
 function genPrices(coin,period){
   const pts={'1D':60,'1W':84,'1M':120,'3M':180}[period]||60;
@@ -494,7 +618,6 @@ function drawChart(coin,period){
   const yOf=v=>pad.t+(1-(v-mn)/(mx-mn||0.001))*uh;
   const isUp=coin.chg>=0;
 
-  // Grid + price labels on right
   const gridLevels=4;
   ctx.font=`9px Inter`;ctx.textAlign='left';
   for(let i=0;i<=gridLevels;i++){
@@ -507,7 +630,6 @@ function drawChart(coin,period){
     ctx.fillText('$'+val.toFixed(val<1?3:2),W-pad.r+8,y+3);
   }
 
-  // Gradient fill
   const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
   grad.addColorStop(0,isUp?'rgba(52,211,153,0.25)':'rgba(248,113,113,0.25)');
   grad.addColorStop(1,'rgba(0,0,0,0)');
@@ -517,12 +639,10 @@ function drawChart(coin,period){
   ctx.lineTo(xOf(prices.length-1),H-pad.b);
   ctx.closePath();ctx.fillStyle=grad;ctx.fill();
 
-  // Main line
   ctx.beginPath();
   prices.forEach((p,i)=>{if(i===0)ctx.moveTo(xOf(i),yOf(p));else ctx.lineTo(xOf(i),yOf(p));});
   ctx.strokeStyle=isUp?'#34d399':'#f87171';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();
 
-  // Buy/Sell signals
   const step=Math.max(3,Math.floor(prices.length/12));
   for(let i=step;i<prices.length-step;i+=step){
     const prev=prices[i-step],curr=prices[i],next=prices[i+step];
@@ -540,7 +660,6 @@ function drawChart(coin,period){
     }
   }
 
-  // Current price dot
   const lx=xOf(prices.length-1),ly=yOf(prices[prices.length-1]);
   ctx.shadowColor=isUp?'#34d399':'#f87171';ctx.shadowBlur=10;
   ctx.beginPath();ctx.arc(lx,ly,4,0,Math.PI*2);ctx.fillStyle=isUp?'#34d399':'#f87171';ctx.fill();
@@ -566,20 +685,6 @@ function setupChartHover(canvas,coin,prices,xOf,yOf,pad,W,H,mn,mx,dpr){
     tooltip.style.borderColor=isUp?'rgba(52,211,153,0.4)':'rgba(248,113,113,0.4)';
   };
   canvas.onmouseleave=()=>{tooltip.style.display='none';};
-}
-
-// PAYMENT METHOD
-document.getElementById('paymentMethod').addEventListener('change',function(){
-  const map={'Binance Pay':'BINANCE PAY — SEND TO','USDT TRC20':'USDT TRC20 — WALLET ADDRESS','BTC':'BITCOIN — WALLET ADDRESS'};
-  document.getElementById('methodLabel').textContent=map[this.value]||'SEND TO';
-});
-
-function copyID(){
-  navigator.clipboard.writeText('1130983375').then(()=>{
-    const el=document.querySelector('.pay-id');const orig=el.textContent;
-    el.textContent='✓ Copied!';el.style.color='#34d399';
-    setTimeout(()=>{el.textContent=orig;el.style.color='';},2000);
-  });
 }
 
 function handlePurchase(){
@@ -662,7 +767,7 @@ function renderHistory(){
   document.getElementById('statSuccess').textContent=completed;
 }
 
-buildTicker();buildGrid();renderHistory();
+buildTicker();buildGrid();renderHistory();updatePaymentDetails();
 setInterval(renderHistory,60000);
 </script>
 </body>
